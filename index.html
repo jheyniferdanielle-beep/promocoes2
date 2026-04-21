@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador Profissional de Promoção</title>
+
+  <!-- PWA CONFIG -->
+  <title>Achadinhos da Gê</title>
+  <meta name="theme-color" content="#25D366">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+
   <style>
     body { font-family: Arial; background:#f4f4f4; padding:20px; }
     .box { background:#fff; padding:20px; border-radius:10px; max-width:500px; margin:auto; box-shadow:0 0 10px rgba(0,0,0,0.1);} 
@@ -14,9 +20,9 @@
 </head>
 <body>
   <div class="box">
-    <h2>🔥 Gerador para GRUPO</h2>
+    <h2>🔥 Achadinhos da Gê</h2>
 
-    <input type="text" id="nome" placeholder="Nome do produto (ex: Lenço Umedecido MamyPoko)">
+    <input type="text" id="nome" placeholder="Nome do produto">
     <input type="text" id="link" placeholder="Link do produto">
     <input type="text" id="precoAntigo" placeholder="Preço antigo">
     <input type="text" id="precoNovo" placeholder="Preço atual">
@@ -27,96 +33,29 @@
   </div>
 
   <script>
-
     function gerarFrase(nome){
       nome = nome.toLowerCase();
 
-      // 👶 BEBÊ (PALAVRAS + MARCAS + ITENS)
-      if(
-        nome.includes('fralda') ||
-        nome.includes('lenço') ||
-        nome.includes('lenco') ||
-        nome.includes('umedecido') ||
-        nome.includes('bebe') ||
-        nome.includes('mamadeira') ||
-        nome.includes('mamypoko') ||
-        nome.includes('pampers') ||
-        nome.includes('huggies')
-      ){
-        return '👶 Mamães olha isso!! Promoção perfeita pro bebê 😱';
+      if(nome.includes('fralda') || nome.includes('lenço') || nome.includes('mamypoko') || nome.includes('pampers') || nome.includes('huggies')){
+        return '👶 Mamães olha isso!! promoção maravilhosa pro bebê 😱';
       }
-
-      // 👕 MASCULINO
-      if(
-        nome.includes('cueca') ||
-        nome.includes('boxer') ||
-        nome.includes('lupo') ||
-        nome.includes('insider')
-      ){
-        return '🩲 Olha isso aqui pros maridos 👀 vocês sabem que eles precisam 😂';
+      if(nome.includes('cueca') || nome.includes('boxer')){
+        return '🩲 Olha isso pros maridos 👀 vocês sabem que precisam 😂';
       }
-
-      // 👗 FEMININO
-      if(
-        nome.includes('vestido') ||
-        nome.includes('bolsa') ||
-        nome.includes('cropped') ||
-        nome.includes('saia')
-      ){
-        return '👗 Meninas, olha esse achado MARAVILHOSO 😍';
+      if(nome.includes('vestido') || nome.includes('bolsa')){
+        return '👗 Meninas olha esse achado MARAVILHOSO 😍';
       }
-
-      // 👟 CALÇADOS
-      if(
-        nome.includes('tenis') ||
-        nome.includes('sapato') ||
-        nome.includes('chinelo')
-      ){
+      if(nome.includes('tenis') || nome.includes('sapato')){
         return '👟 Conforto e estilo com preço incrível!';
       }
-
-      // 🎧 ELETRÔNICOS
-      if(
-        nome.includes('fone') ||
-        nome.includes('bluetooth') ||
-        nome.includes('caixa de som') ||
-        nome.includes('jbl') ||
-        nome.includes('xiaomi')
-      ){
+      if(nome.includes('fone') || nome.includes('bluetooth')){
         return '🎧 Som top com preço baixíssimo!';
       }
-
-      // 💄 BELEZA
-      if(
-        nome.includes('kit') ||
-        nome.includes('cosmetico') ||
-        nome.includes('maquiagem') ||
-        nome.includes('perfume') ||
-        nome.includes('creme')
-      ){
-        return '💄 Meninas olha esse kit com preço surreal!';
+      if(nome.includes('maquiagem') || nome.includes('perfume') || nome.includes('cosmetico')){
+        return '💄 Meninas olha esse preço surreal!';
       }
 
-      // 🧹 CASA
-      if(
-        nome.includes('panela') ||
-        nome.includes('air fryer') ||
-        nome.includes('liquidificador') ||
-        nome.includes('aspirador')
-      ){
-        return '🏠 Gente olha isso pra casa!! preço muito bom!';
-      }
-
-      // 🔥 GENÉRICO
-      let frases = [
-        '🔥 Gente olha isso!! preço baixíssimo!',
-        '🚨 PROMOÇÃO FORTE HOJE!',
-        '😱 Olha o preço disso!',
-        '💥 Desconto absurdo!',
-        '⚡ Corram que vai acabar!'
-      ];
-
-      return frases[Math.floor(Math.random() * frases.length)];
+      return '🔥 Gente olha isso!! preço baixíssimo!';
     }
 
     function gerarGrupo(){
@@ -127,19 +66,11 @@
 
       let frase = gerarFrase(nome);
 
-      let mensagem = `🚨 ATENÇÃO GRUPO 🚨\n\n` +
-                     `${frase}\n\n` +
-                     `🛍️ ${nome}\n\n` +
-                     `❌ De: ${precoAntigo}\n` +
-                     `✅ HOJE: ${precoNovo}\n\n` +
-                     `🔥 LINK DIRETO:\n${link}\n\n` +
-                     `⚡ Corre que já já acaba!`;
+      let mensagem = `🚨 ATENÇÃO GRUPO 🚨\n\n${frase}\n\n🛍️ ${nome}\n\n❌ De: ${precoAntigo}\n✅ HOJE: ${precoNovo}\n\n🔥 LINK:\n${link}\n\n⚡ Corre que acaba!`;
 
       document.getElementById('preview').innerHTML = `
-        <p><strong>Mensagem:</strong></p>
         <p>${mensagem.replace(/\n/g, '<br>')}</p>
         <button onclick="copiarTexto()">Copiar</button>
-        <button onclick="enviarWhats()" style="margin-top:10px;">Enviar WhatsApp</button>
       `;
 
       window.textoAtual = mensagem;
@@ -155,11 +86,10 @@
       alert('Copiado!');
     }
 
-    function enviarWhats(){
-      let url = `https://wa.me/?text=${encodeURIComponent(window.textoAtual)}`;
-      window.open(url, '_blank');
+    // SERVICE WORKER
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
     }
-
   </script>
 </body>
 </html>
