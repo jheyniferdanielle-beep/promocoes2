@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador Profissional de Promoção</title>
+  <style>
+    body { font-family: Arial; background:#f4f4f4; padding:20px; }
+    .box { background:#fff; padding:20px; border-radius:10px; max-width:500px; margin:auto; box-shadow:0 0 10px rgba(0,0,0,0.1);} 
+    input, textarea, button { width:100%; margin-top:10px; padding:10px; border-radius:8px; border:1px solid #ccc; }
+    button { background:#25D366; color:#fff; border:none; cursor:pointer; font-weight:bold; }
+    .preview { margin-top:15px; background:#fafafa; padding:10px; border-radius:8px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>🔥 Gerador Profissional</h2>
+
+    <input type="text" id="nome" placeholder="Nome do produto">
+    <input type="text" id="precoAntigo" placeholder="Preço antigo">
+    <input type="text" id="precoNovo" placeholder="Preço atual">
+    <input type="text" id="link" placeholder="Link do produto">
+    <input type="text" id="imagem" placeholder="Link da imagem (opcional)">
+
+    <button onclick="gerar()">Gerar Promoção</button>
+
+    <div class="preview" id="preview"></div>
+  </div>
+
+  <script>
+    function gerarFrase(nome){
+      let frases = [
+        `🔥 OLHA ISSO! ${nome} com preço absurdo!`,
+        `🚨 PROMOÇÃO RELÂMPAGO no ${nome}!`,
+        `😱 Você não vai acreditar nesse preço de ${nome}!`,
+        `💥 DESCONTO INSANO no ${nome}!`,
+        `⚡ Últimas unidades de ${nome} com esse valor!`,
+        `🛒 ${nome} quase de graça hoje!`,
+        `🔥 Achadinho TOP: ${nome}!`
+      ];
+
+      return frases[Math.floor(Math.random() * frases.length)];
+    }
+
+    function gerar(){
+      let nome = document.getElementById('nome').value;
+      let precoAntigo = document.getElementById('precoAntigo').value;
+      let precoNovo = document.getElementById('precoNovo').value;
+      let link = document.getElementById('link').value;
+      let imagem = document.getElementById('imagem').value;
+
+      let frase = gerarFrase(nome);
+
+      let mensagem = `${frase}\n\n` +
+                     `🛍️ ${nome}\n` +
+                     `💸 De: ${precoAntigo}\n` +
+                     `✅ Por: ${precoNovo}\n\n` +
+                     `👉 Compre aqui: ${link}\n\n` +
+                     `⚡ Corre antes que acabe!`;
+
+      let mensagemCodificada = encodeURIComponent(mensagem);
+      let linkWhats = `https://wa.me/?text=${mensagemCodificada}`;
+
+      document.getElementById('preview').innerHTML = `
+        <p><strong>Prévia:</strong></p>
+        <p>${mensagem.replace(/\n/g, '<br>')}</p>
+        ${imagem ? `<img src="${imagem}" width="100%" style="border-radius:8px; margin-top:10px;">` : ''}
+        <a href="${linkWhats}" target="_blank">
+          <button style="margin-top:10px;">Enviar no WhatsApp</button>
+        </a>
+      `;
+    }
+
+    // Permitir instalar como app (PWA simples)
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+  </script>
+</body>
+</html>
