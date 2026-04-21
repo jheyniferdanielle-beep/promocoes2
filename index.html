@@ -7,76 +7,159 @@
   <style>
     body { font-family: Arial; background:#f4f4f4; padding:20px; }
     .box { background:#fff; padding:20px; border-radius:10px; max-width:500px; margin:auto; box-shadow:0 0 10px rgba(0,0,0,0.1);} 
-    input, textarea, button { width:100%; margin-top:10px; padding:10px; border-radius:8px; border:1px solid #ccc; }
+    input, button { width:100%; margin-top:10px; padding:10px; border-radius:8px; border:1px solid #ccc; }
     button { background:#25D366; color:#fff; border:none; cursor:pointer; font-weight:bold; }
     .preview { margin-top:15px; background:#fafafa; padding:10px; border-radius:8px; }
   </style>
 </head>
 <body>
   <div class="box">
-    <h2>🔥 Gerador Profissional</h2>
+    <h2>🔥 Gerador para GRUPO</h2>
 
-    <input type="text" id="nome" placeholder="Nome do produto">
+    <input type="text" id="nome" placeholder="Nome do produto (ex: Lenço Umedecido MamyPoko)">
+    <input type="text" id="link" placeholder="Link do produto">
     <input type="text" id="precoAntigo" placeholder="Preço antigo">
     <input type="text" id="precoNovo" placeholder="Preço atual">
-    <input type="text" id="link" placeholder="Link do produto">
-    <input type="text" id="imagem" placeholder="Link da imagem (opcional)">
 
-    <button onclick="gerar()">Gerar Promoção</button>
+    <button onclick="gerarGrupo()">Gerar Promoção</button>
 
     <div class="preview" id="preview"></div>
   </div>
 
   <script>
+
     function gerarFrase(nome){
+      nome = nome.toLowerCase();
+
+      // 👶 BEBÊ (PALAVRAS + MARCAS + ITENS)
+      if(
+        nome.includes('fralda') ||
+        nome.includes('lenço') ||
+        nome.includes('lenco') ||
+        nome.includes('umedecido') ||
+        nome.includes('bebe') ||
+        nome.includes('mamadeira') ||
+        nome.includes('mamypoko') ||
+        nome.includes('pampers') ||
+        nome.includes('huggies')
+      ){
+        return '👶 Mamães olha isso!! Promoção perfeita pro bebê 😱';
+      }
+
+      // 👕 MASCULINO
+      if(
+        nome.includes('cueca') ||
+        nome.includes('boxer') ||
+        nome.includes('lupo') ||
+        nome.includes('insider')
+      ){
+        return '🩲 Olha isso aqui pros maridos 👀 vocês sabem que eles precisam 😂';
+      }
+
+      // 👗 FEMININO
+      if(
+        nome.includes('vestido') ||
+        nome.includes('bolsa') ||
+        nome.includes('cropped') ||
+        nome.includes('saia')
+      ){
+        return '👗 Meninas, olha esse achado MARAVILHOSO 😍';
+      }
+
+      // 👟 CALÇADOS
+      if(
+        nome.includes('tenis') ||
+        nome.includes('sapato') ||
+        nome.includes('chinelo')
+      ){
+        return '👟 Conforto e estilo com preço incrível!';
+      }
+
+      // 🎧 ELETRÔNICOS
+      if(
+        nome.includes('fone') ||
+        nome.includes('bluetooth') ||
+        nome.includes('caixa de som') ||
+        nome.includes('jbl') ||
+        nome.includes('xiaomi')
+      ){
+        return '🎧 Som top com preço baixíssimo!';
+      }
+
+      // 💄 BELEZA
+      if(
+        nome.includes('kit') ||
+        nome.includes('cosmetico') ||
+        nome.includes('maquiagem') ||
+        nome.includes('perfume') ||
+        nome.includes('creme')
+      ){
+        return '💄 Meninas olha esse kit com preço surreal!';
+      }
+
+      // 🧹 CASA
+      if(
+        nome.includes('panela') ||
+        nome.includes('air fryer') ||
+        nome.includes('liquidificador') ||
+        nome.includes('aspirador')
+      ){
+        return '🏠 Gente olha isso pra casa!! preço muito bom!';
+      }
+
+      // 🔥 GENÉRICO
       let frases = [
-        `🔥 OLHA ISSO! ${nome} com preço absurdo!`,
-        `🚨 PROMOÇÃO RELÂMPAGO no ${nome}!`,
-        `😱 Você não vai acreditar nesse preço de ${nome}!`,
-        `💥 DESCONTO INSANO no ${nome}!`,
-        `⚡ Últimas unidades de ${nome} com esse valor!`,
-        `🛒 ${nome} quase de graça hoje!`,
-        `🔥 Achadinho TOP: ${nome}!`
+        '🔥 Gente olha isso!! preço baixíssimo!',
+        '🚨 PROMOÇÃO FORTE HOJE!',
+        '😱 Olha o preço disso!',
+        '💥 Desconto absurdo!',
+        '⚡ Corram que vai acabar!'
       ];
 
       return frases[Math.floor(Math.random() * frases.length)];
     }
 
-    function gerar(){
+    function gerarGrupo(){
       let nome = document.getElementById('nome').value;
+      let link = document.getElementById('link').value;
       let precoAntigo = document.getElementById('precoAntigo').value;
       let precoNovo = document.getElementById('precoNovo').value;
-      let link = document.getElementById('link').value;
-      let imagem = document.getElementById('imagem').value;
 
       let frase = gerarFrase(nome);
 
-      let mensagem = `${frase}\n\n` +
-                     `🛍️ ${nome}\n` +
-                     `💸 De: ${precoAntigo}\n` +
-                     `✅ Por: ${precoNovo}\n\n` +
-                     `👉 Compre aqui: ${link}\n\n` +
-                     `⚡ Corre antes que acabe!`;
-
-      let mensagemCodificada = encodeURIComponent(mensagem);
-      let linkWhats = `https://wa.me/?text=${mensagemCodificada}`;
+      let mensagem = `🚨 ATENÇÃO GRUPO 🚨\n\n` +
+                     `${frase}\n\n` +
+                     `🛍️ ${nome}\n\n` +
+                     `❌ De: ${precoAntigo}\n` +
+                     `✅ HOJE: ${precoNovo}\n\n` +
+                     `🔥 LINK DIRETO:\n${link}\n\n` +
+                     `⚡ Corre que já já acaba!`;
 
       document.getElementById('preview').innerHTML = `
-        <p><strong>Prévia:</strong></p>
+        <p><strong>Mensagem:</strong></p>
         <p>${mensagem.replace(/\n/g, '<br>')}</p>
-        ${imagem ? `<img src="${imagem}" width="100%" style="border-radius:8px; margin-top:10px;">` : ''}
-        <a href="${linkWhats}" target="_blank">
-          <button style="margin-top:10px;">Enviar no WhatsApp</button>
-        </a>
+        <button onclick="copiarTexto()">Copiar</button>
+        <button onclick="enviarWhats()" style="margin-top:10px;">Enviar WhatsApp</button>
       `;
+
+      window.textoAtual = mensagem;
     }
 
-    // Permitir instalar como app (PWA simples)
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
+    function copiarTexto(){
+      let textarea = document.createElement('textarea');
+      textarea.value = window.textoAtual;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      alert('Copiado!');
+    }
+
+    function enviarWhats(){
+      let url = `https://wa.me/?text=${encodeURIComponent(window.textoAtual)}`;
+      window.open(url, '_blank');
+    }
+
   </script>
 </body>
 </html>
